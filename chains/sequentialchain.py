@@ -24,11 +24,12 @@ final_chain = chain1 | (lambda title: {"title":title, "emotion": emotion}) | cha
 
 st.title("Speech Generator")
 topic=st.text_input("Enter the topic here...")
-emotion=st.text_input("Enter the emotion here...")
+emotion=st.selectbox("Enter the Emotion here...",["Inspiring","Passionate","Empathetic","Motivational","Heartfelt","Empowering","Enthusiastic"])
+if topic and emotion:
 
-if st.button("Generate speech"):
-    st.write("Generating speech...")
+    if st.button("Generate speech"):
+        st.write("Generating speech...")
 
     if topic:
-        response = final_chain.invoke({"topic": topic})
+        response = final_chain.invoke({"topic": topic, "emotion": emotion})
         st.write(response.content)
